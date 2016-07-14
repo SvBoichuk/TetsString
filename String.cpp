@@ -42,6 +42,55 @@ String& String::operator+=(const String &obj)
 	return *this;
 }
 
+char& String::at(int index)
+{
+	if (index > (length()-1))
+		throw std::out_of_range("Error! Out of range!");
+
+	return str[index];
+}
+
+const char & String::at(int index) const
+{
+	if (index > (length()-1))
+		throw std::out_of_range("Error! Out of range!");
+
+	return str[index];
+}
+
+char & String::back()
+{
+	if (empty())
+		throw std::exception("String is empty!");
+	else return str[length()-1];
+}
+
+const char & String::back() const
+{
+	if (empty())
+		throw std::exception("String is empty!");
+	else return str[length() - 1];
+}
+
+char & String::front()
+{
+	if (empty())
+		throw std::exception("String is empty!");
+	else return str[0];
+}
+
+const char & String::front() const
+{
+	if (empty())
+		throw std::exception("String is empty!");
+	else return str[0];
+}
+
+void String::clear()
+{
+	m_memset(str, '\0', length());
+}
+
 
 void String::str_reverse(String& _str)
 {
@@ -68,7 +117,7 @@ bool operator<(const String & str1, const String & str2)
 
 std::ostream & operator<<(std::ostream& os, const String & str)
 {
-	os << str.str << std::endl;
+	os << str.str;
 	return os;
 }
 

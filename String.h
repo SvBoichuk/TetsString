@@ -1,5 +1,5 @@
-#ifndef _M_STRING_
-#define  _M_STRING_
+#ifndef		_M_STRING_
+#define		_M_STRING_
 
 #include <iostream>
 #include "MyString.h"
@@ -16,8 +16,18 @@ public:
 	String(size_t _size, const char c);
 	String& operator=(String&);
 	String& operator+=(const String&);
-	size_t length() const { return size; }
+	size_t length() const { return m_strlen(str); }
+	size_t Size()	const { return size; }
 	bool empty() const { return size == 0; }
+
+	char& at(int index);
+	const char& at(int index) const;
+	char& back();
+	const char& back() const;
+	char& front();
+	const char& front() const;
+
+	void clear();
 
 	const char* to_c_str() const { return str; }
 

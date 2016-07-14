@@ -106,11 +106,14 @@ char * m_strncat(char * dest, size_t n, const char * src)
 
 void * m_memset (char * dest, int z, size_t size)
 {
-	while (size--)
-		*(dest++) = z;
-	*dest = '\0';
+	if (dest == nullptr)
+		return nullptr;
 
-	return (void*) dest;
+	char* ptr = dest;
+	while (size--)
+		*(ptr++) = (unsigned char)z;
+
+	return (void*) ptr;
 }
 
 char * m_strchr (const char * s, int c)
@@ -136,6 +139,7 @@ char * m_strtok (char * str, const char * delim)
 	if(str == nullptr || delim == nullptr)
 		return nullptr;
 
+	ptr = str;
 
 }
 
@@ -170,3 +174,48 @@ size_t m_strcspn(const char * str, const char * reject)
 	return size;
 }
 
+void * m_memchr	(const char * str, char c, size_t size)
+{
+	char* ptr = (char*)str;
+
+	if(str == nullptr || size == 0)
+
+	while (size--)
+	{
+		if (*ptr != c)
+			ptr++;
+		else
+			return ptr;
+	}
+
+	return nullptr;
+}
+
+int m_memcmp	(const void * s1, const void * s2, size_t n)
+{
+	if (s1 == nullptr || s2 == nullptr || n == 0)
+		return 0;
+
+	const char* p1 = (const char*)s1, *p2 = (const char*)s2;
+
+	while (n--)
+	{
+		if (*p1 != *p2)
+			return (*p1 - *p2);
+		else p1++, p2++;
+	}
+
+	return 0;
+}
+
+char * m_strpbrk(const char * str, const char * accept)
+{
+	if (str == nullptr || accept == nullptr)
+		return nullptr;
+
+	while (*str)
+		if (m_strchr(accept, *str++))
+			return (char*)--str;
+
+	return nullptr;
+}
