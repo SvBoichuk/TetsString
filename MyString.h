@@ -19,3 +19,9 @@ char* m_strncat(char* dest, size_t n, const char* src);
 void * m_memset(char * dest, int z, size_t size);
 
 char* m_strchr(const char* s, int c);
+
+char* m_strtok(char* str, const char* delim);
+
+size_t m_strspn (const char* str, const char* accept);
+
+size_t m_strcspn(const char* str, const char* reject);
