@@ -2,22 +2,38 @@
 
 int m_strcmp(const char * str1,const char * str2)
 {
+	RET_VALUES state;
 	if (m_strlen(str1) == m_strlen(str2))
 	{
 		while(str1 != '\0')
 		{
 			if (*(str1++) > *(str2)++)
-				return RET_VALUES::GREAT;
+			{
+				state = RET_VALUES::GREAT;
+				break;
+			}
 			else if (*(str1)++ < *(str2)++)
-				return RET_VALUES::LESS;
-			else return RET_VALUES::EQUAL;
+			{
+				state = RET_VALUES::LESS;
+				break;
+			}
+			else
+			{
+				state = RET_VALUES::EQUAL;
+				break;
+			}
 		}
 	}
-	else return m_strlen(str1) > m_strlen(str2) ? RET_VALUES::GREAT : RET_VALUES::LESS;
+	else state = (m_strlen(str1) > m_strlen(str2)) ? RET_VALUES::GREAT : RET_VALUES::LESS;
+
+	return state;
 }
 
 size_t m_strlen(const char * str)
 {
+	if (str == nullptr) // HZ
+		return 0;
+
 	size_t size = 0;
 
 	while ( *(str++) != '\0')
@@ -30,6 +46,9 @@ size_t m_strlen(const char * str)
 
 char * m_strcpy(char * dest, const char * src)
 {
+	if (src == nullptr)
+		return nullptr;
+
 	while ( (*src) != '\0')
 	{
 		*(dest++) = *(src++);
@@ -41,6 +60,9 @@ char * m_strcpy(char * dest, const char * src)
 
 char * m_strncpy(char * dest, size_t n, const char * src)
 {
+	if (src == nullptr)
+		return nullptr;
+
 	for (; n--;)
 	{
 		*(dest++) = *(src++);
@@ -52,6 +74,9 @@ char * m_strncpy(char * dest, size_t n, const char * src)
 
 char * m_strcat(char * dest, const char * src)
 {
+	if (src == nullptr)
+		return dest;
+
 	dest += m_strlen(dest);
 
 	while ( (*src) != '\0' )
@@ -65,6 +90,9 @@ char * m_strcat(char * dest, const char * src)
 
 char * m_strncat(char * dest, size_t n, const char * src)
 {
+	if (src == nullptr)
+		return dest;
+
 	dest += m_strlen(dest);
 
 	for (;n--;)
@@ -76,21 +104,26 @@ char * m_strncat(char * dest, size_t n, const char * src)
 	return dest;
 }
 
-void * m_memset(char * dest, size_t size, char symbol)
+void * m_memset(char * dest, int z, size_t size)
 {
 	while (size--)
-		*(dest++) = symbol;
+		*(dest++) = z;
 	*dest = '\0';
 
 	return (void*) dest;
 }
 
-char * m_strchr(const char * str, char c)
+char * m_strchr(const char * s, int c)
 {
-	/*TODO*/
-	while (*(str++) != '\0')
+	if (s == nullptr)
+		return nullptr;
+
+	while (*s)
 	{
-		if (*str == c)
-			return const_cast<char*>(str);
+		if (*s++ == (char)c)
+			return (char*)s;
 	}
+
+	return nullptr;
 }
+

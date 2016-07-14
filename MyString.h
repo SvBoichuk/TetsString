@@ -16,6 +16,6 @@ char* m_strcat(char* dest, const char* src);
 
 char* m_strncat(char* dest, size_t n, const char* src);
 
-void* m_memset(char* dest, size_t size ,char symbol = '\0');
+void * m_memset(char * dest, int z, size_t size);
 
-char* m_strchr(const char* str, char c);
+char* m_strchr(const char* s, int c);

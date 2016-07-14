@@ -1,14 +1,11 @@
 #include "String.h"
 
-String::String()
+String::String() : size(0), str(nullptr)
 {
-	size = 0;
-	str = nullptr;
 }
 
-String::String(const char *src)
+String::String(const char *src) : size(m_strlen(src))
 {
-	size = m_strlen(src);
 	str = new char[size + 1];
 	m_strcpy(str, src);
 }
@@ -60,7 +57,8 @@ void String::str_reverse(String& _str)
 
 String::~String()
 {
-	delete[] str;
+	if(str != nullptr)
+		delete[] str;
 }
 
 bool operator<(const String & str1, const String & str2)

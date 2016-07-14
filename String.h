@@ -1,6 +1,8 @@
-#pragma once
-#include "MyString.h"
+#ifndef _M_STRING_
+#define  _M_STRING_
+
 #include <iostream>
+#include "MyString.h"
 
 class String
 {
@@ -31,3 +33,4 @@ public:
 	~String();
 };
 
+#endif
